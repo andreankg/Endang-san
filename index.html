@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Endang-san - Japanese-speaking certified tour guide in Yogyakarta with more than 20 years of experience. Private and group tours available.">
+  <title>Endang-san | Yogyakarta Tour Guide</title>
+
+  <style>
+    :root{
+      --cream:#f7f1e5;
+      --cream-light:#fcf9f2;
+      --paper:#fffdf8;
+      --ink:#29251f;
+      --muted:#756e63;
+      --green:#31583f;
+      --green-dark:#24452f;
+      --gold:#a7834c;
+      --line:#e4dac8;
+      --shadow:0 20px 60px rgba(55,45,30,.10);
+      --radius:24px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--ink);
+      background:var(--cream-light);
+      line-height:1.7;
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+
+    .container{
+      width:min(1120px,92%);
+      margin:auto;
+    }
+
+    /* NAVBAR */
+    header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:rgba(255,253,248,.94);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(228,218,200,.7);
+    }
+
+    nav{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      white-space:nowrap;
+    }
+
+    .brand-mark{
+      width:42px;
+      height:42px;
+      border:1.5px solid var(--gold);
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      color:var(--gold);
+      font-size:20px;
+    }
+
+    .brand-name{
+      font-family:Georgia,serif;
+      font-size:25px;
+      font-style:italic;
+    }
+
+    .brand small{
+      display:block;
+      font-family:Arial,sans-serif;
+      font-size:9px;
+      letter-spacing:2px;
+      font-style:normal;
+      color:var(--muted);
+      margin-top:-5px;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:27px;
+      font-size:14px;
+      color:#4d483f;
+    }
+
+    .nav-links a:hover{color:var(--gold)}
+
+    .nav-cta{
+      background:var(--green);
+      color:white;
+      padding:12px 19px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:13px;
+    }
+
+    .menu{
+      display:none;
+      border:0;
+      background:none;
+      font-size:27px;
+      cursor:pointer;
+    }
+
+    /* HERO */
+    .hero{
+      min-height:650px;
+      display:flex;
+      align-items:center;
+      background:
+        radial-gradient(circle at 85% 25%, rgba(203,180,139,.22), transparent 28%),
+        linear-gradient(120deg,var(--cream),#fbf7ee);
+      overflow:hidden;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:center;
+      padding:80px 0;
+    }
+
+    .eyebrow{
+      color:#94723f;
+      letter-spacing:3px;
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:17px;
+      text-transform:uppercase;
+    }
+
+    h1,h2,h3{
+      font-family:Georgia, "Times New Roman", serif;
+      font-weight:500;
+      line-height:1.15;
+    }
+
+    h1{
+      font-size:clamp(48px,6vw,76px);
+      max-width:650px;
+    }
+
+    .underline{
+      width:170px;
+      height:3px;
+      background:#c9a66a;
+      margin:22px 0 25px;
+      transform:rotate(-1deg);
+    }
+
+    .hero p{
+      max-width:590px;
+      color:var(--muted);
+      font-size:17px;
+      margin-bottom:30px;
+    }
+
+    .buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:14px 22px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:14px;
+      transition:.2s;
+    }
+
+    .btn-primary{
+      background:var(--green);
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      background:var(--green-dark);
+      transform:translateY(-2px);
+    }
+
+    .btn-outline{
+      border:1px solid #b9a47d;
+      color:#5b4b32;
+    }
+
+    .btn-outline:hover{background:#fff}
+
+    .hero-photo{
+      position:relative;
+      display:flex;
+      justify-content:center;
+    }
+
+    .photo-placeholder{
+      width:min(470px,100%);
+      aspect-ratio:1/1;
+      border-radius:46% 46% 42% 42%;
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.4),rgba(208,190,158,.3)),
+        #e7ddcc;
+      border:8px solid rgba(255,255,255,.65);
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:#766b5b;
+      padding:30px;
+      font-family:Georgia,serif;
+      font-size:18px;
+    }
+
+    .photo-placeholder span{
+      display:block;
+      font-family:Arial,sans-serif;
+      font-size:12px;
+      margin-top:8px;
+      color:#968a78;
+    }
+
+    .experience-badge{
+      position:absolute;
+      right:0;
+      bottom:35px;
+      background:var(--paper);
+      padding:18px 22px;
+      border-radius:16px;
+      box-shadow:0 12px 35px rgba(40,35,25,.13);
+      color:#5d4d35;
+    }
+
+    .experience-badge strong{
+      display:block;
+      font-family:Georgia,serif;
+      font-size:22px;
+    }
+
+    /* STATS */
+    .stats{
+      background:#fffaf1;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+    }
+
+    .stat{
+      padding:28px 22px;
+      text-align:center;
+      border-right:1px solid var(--line);
+    }
+
+    .stat:last-child{border-right:0}
+
+    .stat strong{
+      display:block;
+      font-family:Georgia,serif;
+      color:var(--green);
+      font-size:18px;
+      margin-bottom:4px;
+    }
+
+    .stat span{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    /* SECTIONS */
+    section{padding:100px 0}
+
+    .section-head{
+      text-align:center;
+      max-width:700px;
+      margin:0 auto 50px;
+    }
+
+    .section-head h2{font-size:clamp(38px,5vw,54px)}
+    .section-head p{
+      color:var(--muted);
+      margin-top:15px;
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:65px;
+      align-items:center;
+    }
+
+    .about-card{
+      background:#eee5d5;
+      border-radius:30px;
+      min-height:450px;
+      padding:35px;
+      display:flex;
+      align-items:end;
+    }
+
+    .mini-card{
+      background:rgba(255,253,248,.94);
+      padding:18px 20px;
+      border-radius:16px;
+      box-shadow:var(--shadow);
+    }
+
+    .mini-card strong{
+      font-family:Georgia,serif;
+      font-size:20px;
+    }
+
+    .about-copy h2{font-size:48px;margin-bottom:20px}
+    .about-copy p{color:var(--muted);margin-bottom:20px}
+
+    .checks{list-style:none;margin:25px 0}
+    .checks li{
+      margin:10px 0;
+      color:#5d574e;
+    }
+    .checks li::before{
+      content:"✓";
+      color:var(--gold);
+      font-weight:bold;
+      margin-right:10px;
+    }
+
+    /* TOURS */
+    .tour-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .tour-card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:27px;
+      transition:.25s;
+    }
+
+    .tour-card:hover{
+      transform:translateY(-6px);
+      box-shadow:var(--shadow);
+    }
+
+    .tour-icon{
+      width:50px;
+      height:50px;
+      border-radius:14px;
+      background:#eee3cf;
+      display:grid;
+      place-items:center;
+      font-size:24px;
+      margin-bottom:20px;
+    }
+
+    .tour-card h3{font-size:25px;margin-bottom:10px}
+    .tour-card p{font-size:14px;color:var(--muted)}
+
+    /* CERTIFICATION */
+    .cert{
+      background:var(--green);
+      color:white;
+      border-radius:32px;
+      padding:60px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:center;
+    }
+
+    .cert .eyebrow{color:#d8c294}
+    .cert h2{font-size:46px}
+    .cert p{color:#dce4dc;margin-top:17px}
+
+    .cert-list{
+      background:rgba(255,255,255,.08);
+      padding:30px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .cert-list li{
+      list-style:none;
+      padding:11px 0;
+      border-bottom:1px solid rgba(255,255,255,.1);
+    }
+
+    .cert-list li:last-child{border-bottom:0}
+    .cert-list li::before{
+      content:"✓";
+      color:#d6bd8a;
+      margin-right:10px;
+    }
+
+    /* CTA */
+    .contact-box{
+      background:#eee5d5;
+      border-radius:32px;
+      padding:70px 30px;
+      text-align:center;
+    }
+
+    .contact-box h2{font-size:50px}
+    .contact-box p{
+      max-width:600px;
+      margin:15px auto 28px;
+      color:var(--muted);
+    }
+
+    /* FOOTER */
+    footer{
+      background:#252d26;
+      color:#eee8dc;
+      padding:45px 0;
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:25px;
+      align-items:center;
+    }
+
+    footer p{font-size:13px;color:#bfc4bb}
+    .footer-links{display:flex;gap:20px;font-size:13px}
+
+    /* RESPONSIVE */
+    @media(max-width:850px){
+      .nav-links{
+        display:none;
+        position:absolute;
+        top:78px;
+        left:0;
+        right:0;
+        background:#fffdf8;
+        padding:20px 5%;
+        flex-direction:column;
+        align-items:flex-start;
+        border-bottom:1px solid var(--line);
+      }
+      .nav-links.open{display:flex}
+      .nav-cta{display:none}
+      .menu{display:block}
+
+      .hero-grid,
+      .about-grid,
+      .cert{
+        grid-template-columns:1fr;
+      }
+
+      .hero-grid{padding:65px 0}
+      .hero-photo{order:-1}
+      .photo-placeholder{width:330px}
+      .stats-grid{grid-template-columns:1fr 1fr}
+      .stat:nth-child(2){border-right:0}
+      .stat:nth-child(3){border-top:1px solid var(--line)}
+      .stat:nth-child(4){border-top:1px solid var(--line);border-right:0}
+
+      .tour-grid{grid-template-columns:1fr 1fr}
+      section{padding:75px 0}
+    }
+
+    @media(max-width:560px){
+      h1{font-size:46px}
+      .hero p{font-size:15px}
+      .tour-grid{grid-template-columns:1fr}
+      .cert{padding:35px 25px}
+      .cert h2,.about-copy h2,.contact-box h2{font-size:38px}
+      .footer-inner{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <nav class="container">
+    <a href="#home" class="brand">
+      <div class="brand-mark">✦</div>
+      <div>
+        <div class="brand-name">Endang-san</div>
+        <small>YOGYAKARTA TOUR GUIDE</small>
+      </div>
+    </a>
+
+    <button class="menu" id="menuBtn" aria-label="Open menu">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#tours">Tours</a>
+      <a href="#certification">Certification</a>
+      <a href="#contact">Contact</a>
+      <a href="#japanese">日本語</a>
+    </div>
+
+    <a class="nav-cta" href="https://wa.me/6285876951947" target="_blank">
+      WhatsApp
+    </a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+
+      <div>
+        <div class="eyebrow">Welcome to Yogyakarta</div>
+        <h1>Discover Yogyakarta with Endang-san</h1>
+        <div class="underline"></div>
+
+        <p>
+          A Japanese-speaking certified tour guide with more than 20 years
+          of experience, ready to show you Yogyakarta through its culture,
+          history, food, and local life.
+        </p>
+
+        <div class="buttons">
+          <a class="btn btn-primary" href="https://wa.me/6285876951947" target="_blank">
+            WhatsApp Endang-san →
+          </a>
+          <a class="btn btn-outline" href="#tours">Explore Tours</a>
+        </div>
+      </div>
+
+      <div class="hero-photo">
+        <!-- GANTI BLOK INI DENGAN FOTO ENDANG-SAN NANTI -->
+        <div class="photo-placeholder">
+          Your best photo of<br>Endang-san goes here.
+          <span>Recommended: portrait while guiding</span>
+        </div>
+
+        <div class="experience-badge">
+          <strong>20+ years</strong>
+          guiding experience
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="container stats-grid">
+      <div class="stat">
+        <strong>20+ Years</strong>
+        <span>Guiding Experience</span>
+      </div>
+      <div class="stat">
+        <strong>Japanese Speaking</strong>
+        <span>Fluent & Friendly</span>
+      </div>
+      <div class="stat">
+        <strong>Certified Guide</strong>
+        <span>Professional Qualification</span>
+      </div>
+      <div class="stat">
+        <strong>Private & Group</strong>
+        <span>Flexible Tour Options</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container about-grid">
+
+      <div class="about-card">
+        <div class="mini-card">
+          <strong>Local knowledge, personal experience.</strong>
+          <br>
+          <small>Yogyakarta • Indonesia</small>
+        </div>
+      </div>
+
+      <div class="about-copy">
+        <div class="eyebrow">About Endang-san</div>
+        <h2>Your Local Guide in Yogyakarta</h2>
+
+        <p>
+          Hello, I'm Endang-san. I have been working as a tour guide in
+          Yogyakarta for more than 20 years.
+        </p>
+
+        <p>
+          I enjoy meeting travelers from Japan and around the world,
+          sharing the history, culture, food, traditions, and everyday
+          life of Yogyakarta.
+        </p>
+
+        <ul class="checks">
+          <li>Japanese-speaking local guide</li>
+          <li>Certified Yogyakarta tour guide</li>
+          <li>Private and group tours</li>
+          <li>Flexible itinerary based on your interests</li>
+        </ul>
+
+        <a class="btn btn-outline" href="#contact">Talk to Endang-san →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TOURS -->
+  <section id="tours">
+    <div class="container">
+
+      <div class="section-head">
+        <div class="eyebrow">Tours & Experiences</div>
+        <h2>Explore the Best of Yogyakarta</h2>
+        <p>
+          From famous landmarks to local culture and food, choose an
+          experience or create your own itinerary.
+        </p>
+      </div>
+
+      <div class="tour-grid">
+
+        <article class="tour-card">
+          <div class="tour-icon">🏯</div>
+          <h3>Yogyakarta City</h3>
+          <p>
+            Discover the city's history, culture, local neighborhoods,
+            Kraton, Taman Sari, and Malioboro.
+          </p>
+        </article>
+
+        <article class="tour-card">
+          <div class="tour-icon">🛕</div>
+          <h3>Borobudur</h3>
+          <p>
+            Explore one of Indonesia's most remarkable cultural and
+            historical landmarks with a local guide.
+          </p>
+        </article>
+
+        <article class="tour-card">
+          <div class="tour-icon">⛩️</div>
+          <h3>Prambanan</h3>
+          <p>
+            Discover the stories, architecture, and cultural heritage
+            surrounding the Prambanan temple complex.
+          </p>
+        </article>
+
+        <article class="tour-card">
+          <div class="tour-icon">🍜</div>
+          <h3>Local Food</h3>
+          <p>
+            Experience authentic Yogyakarta flavors and discover local
+            dishes beyond the usual tourist spots.
+          </p>
+        </article>
+
+        <article class="tour-card">
+          <div class="tour-icon">📸</div>
+          <h3>Culture & Local Life</h3>
+          <p>
+            Meet the local side of Yogyakarta and experience traditions,
+            crafts, markets, and everyday life.
+          </p>
+        </article>
+
+        <article class="tour-card">
+          <div class="tour-icon">🗺️</div>
+          <h3>Custom Tour</h3>
+          <p>
+            Have your own itinerary? Tell Endang-san what you want to see
+            and she can help plan a flexible private or group tour.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATION -->
+  <section id="certification">
+    <div class="container">
+      <div class="cert">
+
+        <div>
+          <div class="eyebrow">Professional Guide</div>
+          <h2>Certified & Experienced</h2>
+          <p>
+            With more than two decades of experience, Endang-san provides
+            a professional and comfortable guiding experience for Japanese
+            travelers, families, individuals, and groups.
+          </p>
+        </div>
+
+        <ul class="cert-list">
+          <li>Yogyakarta Tour Guide Certification</li>
+          <li>Professional Tour Guide Qualification</li>
+          <li>Japanese-speaking guiding experience</li>
+          <li>Cultural & historical knowledge</li>
+          <li>Private & group tour experience</li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- JAPANESE -->
+  <section id="japanese">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Japanese Travelers</div>
+        <h2>日本語で安心してジョグジャカルタを楽しみませんか？</h2>
+        <p>
+          20年以上の経験を持つ日本語対応ガイド、Endang-sanが
+          ジョグジャカルタの歴史・文化・食・ローカルな魅力をご案内します。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-box">
+        <div class="eyebrow">Plan Your Yogyakarta Trip</div>
+        <h2>Let's explore Yogyakarta together.</h2>
+        <p>
+          Tell Endang-san your travel dates, group size, and what you would
+          like to experience. Private and group tours are welcome.
+        </p>
+
+        <a class="btn btn-primary" href="https://wa.me/6285876951947" target="_blank">
+          Contact Endang-san on WhatsApp →
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="brand-name">Endang-san</div>
+      <p>Japanese-speaking tour guide in Yogyakarta</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#tours">Tours</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
+
+  menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+  });
+
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+    });
+  });
+</script>
+
+</body>
+</html>
