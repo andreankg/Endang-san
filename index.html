@@ -379,6 +379,39 @@
     .tour-card h3{font-size:25px;margin-bottom:10px}
     .tour-card p{font-size:14px;color:var(--muted)}
 
+    /* REAL PHOTOGRAPHY */
+    .hero-image-frame{
+      position:relative;width:min(470px,100%);aspect-ratio:4/5;overflow:hidden;
+      border:8px solid rgba(255,255,255,.78);border-radius:220px 220px 30px 30px;
+      box-shadow:var(--shadow);background:#e7ddcc;
+    }
+    .hero-image-frame img{width:100%;height:100%;object-fit:cover;object-position:center 55%;}
+    .hero-image-label{position:absolute;left:18px;bottom:18px;padding:10px 15px;border-radius:999px;background:rgba(255,253,248,.92);color:#514735;font-size:12px;font-weight:700;}
+    .about-card{position:relative;overflow:hidden;padding:0;min-height:500px;isolation:isolate;}
+    .about-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;z-index:0;}
+    .about-card::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(22,28,20,.28));z-index:1;pointer-events:none;}
+    .about-card .mini-card{margin:25px;position:relative;z-index:2;}
+    .tour-card-with-photo{padding:12px;overflow:hidden;}
+    .tour-photo{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;margin-bottom:20px;border:1px solid rgba(167,131,76,.25);}
+    .tour-card-with-photo h3,.tour-card-with-photo p{margin-left:10px;margin-right:10px;}
+    .tour-card-with-photo p{margin-bottom:12px;}
+
+    /* SMOOTH, RESPONSIVE PHOTO SLIDER */
+    .gallery-section{background:#fffaf1;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+    .gallery-shell{max-width:920px;margin:0 auto;}
+    .gallery-viewport{overflow:hidden;border-radius:26px;border:7px solid #fffdf8;box-shadow:var(--shadow);background:#e9e0d1;}
+    .gallery-track{display:flex;transition:transform .65s cubic-bezier(.22,.61,.36,1);will-change:transform;}
+    .gallery-slide{flex:0 0 100%;min-width:0;position:relative;margin:0;aspect-ratio:16/9;background:#e9e0d1;}
+    .gallery-slide img{width:100%;height:100%;object-fit:cover;}
+    .gallery-slide figcaption{position:absolute;left:20px;right:20px;bottom:20px;width:max-content;max-width:calc(100% - 40px);padding:10px 16px;border-radius:999px;background:rgba(255,253,248,.94);color:#40392f;font-size:13px;font-weight:700;box-shadow:0 6px 20px rgba(30,25,15,.12);}
+    .gallery-controls{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:22px;}
+    .gallery-arrow{width:44px;height:44px;border:1px solid #d7c9b2;border-radius:50%;background:#fffdf8;color:var(--green);font-size:21px;cursor:pointer;transition:background .2s,transform .2s;}
+    .gallery-arrow:hover{background:#eee5d5;transform:translateY(-2px);}
+    .gallery-dots{display:flex;align-items:center;justify-content:center;gap:9px;}
+    .gallery-dot{width:9px;height:9px;border:0;border-radius:999px;background:#d6c9b4;cursor:pointer;padding:0;transition:width .25s,background .25s;}
+    .gallery-dot.active{width:25px;background:var(--green);}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.gallery-track{transition:none}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
     /* CERTIFICATION */
     .cert{
       background:var(--green);
@@ -502,7 +535,7 @@
 
       .hero-grid{padding:65px 0}
       .hero-photo{order:-1}
-      .photo-placeholder{width:330px}
+      .hero-image-frame{width:330px;aspect-ratio:4/4.5}
       .stats-grid{grid-template-columns:1fr 1fr}
       .stat:nth-child(2){border-right:0}
       .stat:nth-child(3){border-top:1px solid var(--line)}
@@ -516,6 +549,10 @@
       h1{font-size:46px}
       .hero p{font-size:15px}
       .tour-grid{grid-template-columns:1fr}
+      .gallery-viewport{border-width:4px;border-radius:20px}
+      .gallery-slide{aspect-ratio:4/3}
+      .gallery-slide figcaption{left:12px;right:12px;bottom:12px;max-width:calc(100% - 24px);font-size:11px;padding:8px 12px}
+      .gallery-controls{gap:15px}
       .cert{padding:35px 25px}
       .cert h2,.about-copy h2,.contact-box h2{font-size:38px}
       .footer-inner{flex-direction:column;align-items:flex-start}
@@ -535,12 +572,13 @@
       </div>
     </a>
 
-    <button class="menu" id="menuBtn" aria-label="Open menu">☰</button>
+    <button class="menu" id="menuBtn" type="button" aria-label="Open menu" aria-controls="navLinks" aria-expanded="false">☰</button>
 
     <div class="nav-links" id="navLinks">
       <a href="#home" data-i18n="navHome">Home</a>
       <a href="#about" data-i18n="footerAbout">About</a>
       <a href="#tours" data-i18n="footerTours">Tours</a>
+      <a href="#gallery" data-i18n="navGallery">Gallery</a>
       <a href="#certification" data-i18n="navCert">Certification</a>
       <a href="#contact" data-i18n="footerContact">Contact</a>
       <a href="#japanese" data-i18n="navJapanese">日本語</a>
@@ -583,9 +621,9 @@
       </div>
 
       <div class="hero-photo">
-        <!-- GANTI BLOK INI DENGAN FOTO ENDANG-SAN NANTI -->
-        <div class="photo-placeholder">
-          <span data-i18n="photoPlaceholder">Your best photo of<br>Endang-san goes here.<br><small>Recommended: portrait while guiding</small></span>
+        <div class="hero-image-frame">
+          <img src="images/hero-borobudur-sunrise.webp" alt="Sunrise at Borobudur with the Buddha statue in silhouette" fetchpriority="high">
+          <span class="hero-image-label" data-i18n="heroImageLabel">A sunrise to remember</span>
         </div>
 
         <div class="experience-badge">
@@ -624,6 +662,7 @@
     <div class="container about-grid">
 
       <div class="about-card">
+        <img src="images/about-endang-san.webp" alt="Endang-san smiling during a trip in Indonesia" loading="lazy">
         <div class="mini-card">
           <strong data-i18n="aboutMini">Local knowledge, personal experience.</strong>
           <br>
@@ -682,27 +721,27 @@
           </p>
         </article>
 
-        <article class="tour-card">
-          <div class="tour-icon">🛕</div>
+        <article class="tour-card tour-card-with-photo">
+          <img class="tour-photo" src="images/tour-borobudur-guests.webp" alt="Endang-san with guests at Borobudur Temple" loading="lazy">
           <h3 data-i18n="tour2Title">Borobudur</h3>
           <p>
             <span data-i18n="tour2Text">Explore one of Indonesia's most remarkable cultural and historical landmarks with a local guide.</span>
           </p>
         </article>
 
-        <article class="tour-card">
-          <div class="tour-icon">⛩️</div>
+        <article class="tour-card tour-card-with-photo">
+          <img class="tour-photo" src="images/tour-prambanan-guests.webp" alt="Guests enjoying a visit to Prambanan Temple at sunset" loading="lazy">
           <h3 data-i18n="tour3Title">Prambanan</h3>
           <p>
             <span data-i18n="tour3Text">Discover the stories, architecture, and cultural heritage surrounding the Prambanan temple complex.</span>
           </p>
         </article>
 
-        <article class="tour-card">
-          <div class="tour-icon">🍜</div>
-          <h3 data-i18n="tour4Title">Local Food</h3>
+        <article class="tour-card tour-card-with-photo">
+          <img class="tour-photo" src="images/tour-jeep.webp" alt="Endang-san with guests on a jeep adventure" loading="lazy">
+          <h3 data-i18n="tour4Title">Jeep Adventure</h3>
           <p>
-            <span data-i18n="tour4Text">Experience authentic Yogyakarta flavors and discover local dishes beyond the usual tourist spots.</span>
+            <span data-i18n="tour4Text">Enjoy an exciting jeep ride through volcanic landscapes and scenic viewpoints around Yogyakarta.</span>
           </p>
         </article>
 
@@ -722,6 +761,32 @@
           </p>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="galleryEyebrow">Moments Along the Way</div>
+        <h2 data-i18n="galleryTitle">Memories with Our Guests</h2>
+        <p data-i18n="galleryText">A few moments from exploring Yogyakarta, its temples, culture, and local experiences together.</p>
+      </div>
+      <div class="gallery-shell" aria-label="Photo gallery carousel">
+        <div class="gallery-viewport">
+          <div class="gallery-track" id="galleryTrack">
+            <figure class="gallery-slide"><img src="images/gallery-prambanan-temple.webp" alt="Prambanan temple towers under a clear blue sky" loading="lazy"><figcaption data-i18n="galleryCaption1">Discovering the temples of Yogyakarta</figcaption></figure>
+            <figure class="gallery-slide"><img src="images/gallery-local-experience.webp" alt="Endang-san and guests enjoying a local cultural experience" loading="lazy"><figcaption data-i18n="galleryCaption2">Experiencing local life together</figcaption></figure>
+            <figure class="gallery-slide"><img src="images/gallery-cultural-visit.webp" alt="Endang-san with guests during a cultural visit" loading="lazy"><figcaption data-i18n="galleryCaption3">Sharing culture and smiles</figcaption></figure>
+            <figure class="gallery-slide"><img src="images/gallery-guest-memory.webp" alt="Endang-san with a guest in a traditional cultural setting" loading="lazy"><figcaption data-i18n="galleryCaption4">Making travel memories</figcaption></figure>
+          </div>
+        </div>
+        <div class="gallery-controls">
+          <button type="button" class="gallery-arrow" id="galleryPrev" aria-label="Previous photo">←</button>
+          <div class="gallery-dots" id="galleryDots" aria-label="Choose a photo"></div>
+          <button type="button" class="gallery-arrow" id="galleryNext" aria-label="Next photo">→</button>
+        </div>
       </div>
     </div>
   </section>
@@ -793,6 +858,7 @@
     <div class="footer-links">
       <a href="#about" data-i18n="footerAbout">About</a>
       <a href="#tours" data-i18n="footerTours">Tours</a>
+      <a href="#gallery" data-i18n="navGallery">Gallery</a>
       <a href="#contact" data-i18n="footerContact">Contact</a>
     </div>
   </div>
@@ -803,21 +869,23 @@
   const navLinks = document.getElementById("navLinks");
 
   menuBtn.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
+    const isOpen = navLinks.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", String(isOpen));
   });
 
   document.querySelectorAll(".nav-links a").forEach(link => {
     link.addEventListener("click", () => {
       navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
     });
   });
 
   const translations = {
     en: {
-      brandTag:"YOGYAKARTA TOUR GUIDE", navHome:"Home", navAbout:"About", navTours:"Tours", navCert:"Certification", navContact:"Contact", navJapanese:"Japanese", navCta:"WhatsApp",
-      heroEyebrow:"Welcome to Yogyakarta", heroTitle:"Discover Yogyakarta with Endang-san",
+      brandTag:"YOGYAKARTA TOUR GUIDE", navHome:"Home", navAbout:"About", navTours:"Tours", navGallery:"Gallery", navCert:"Certification", navContact:"Contact", navJapanese:"Japanese", navCta:"WhatsApp",
+      heroImageLabel:"A sunrise to remember", galleryEyebrow:"Moments Along the Way", galleryTitle:"Memories with Our Guests", galleryText:"A few moments from exploring Yogyakarta, its temples, culture, and local experiences together.", galleryCaption1:"Discovering the temples of Yogyakarta", galleryCaption2:"Experiencing local life together", galleryCaption3:"Sharing culture and smiles", galleryCaption4:"Making travel memories", heroEyebrow:"Welcome to Yogyakarta", heroTitle:"Discover Yogyakarta with Endang-san",
       heroText:"A Japanese-speaking certified tour guide with more than 20 years of experience, ready to show you Yogyakarta through its culture, history, food, and local life.",
-      heroWhatsapp:"WhatsApp Endang-san →", heroExplore:"Explore Tours", photoPlaceholder:"Your best photo of<br>Endang-san goes here.<br><small>Recommended: portrait while guiding</small>", badgeText:"guiding experience",
+      heroWhatsapp:"WhatsApp Endang-san →", heroExplore:"Explore Tours", badgeText:"guiding experience",
       stat1:"Guiding Experience", stat2:"Fluent & Friendly", stat3:"Professional Qualification", stat4:"Flexible Tour Options",
       aboutEyebrow:"About Endang-san", aboutMini:"Local knowledge, personal experience.", aboutLocation:"Yogyakarta • Indonesia", aboutTitle:"Your Local Guide in Yogyakarta",
       aboutP1:"Hello, I'm Endang-san. I have been working as a tour guide in Yogyakarta for more than 20 years.",
@@ -827,7 +895,7 @@
       tour1Title:"Yogyakarta City", tour1Text:"Discover the city's history, culture, local neighborhoods, Kraton, Taman Sari, and Malioboro.",
       tour2Title:"Borobudur", tour2Text:"Explore one of Indonesia's most remarkable cultural and historical landmarks with a local guide.",
       tour3Title:"Prambanan", tour3Text:"Discover the stories, architecture, and cultural heritage surrounding the Prambanan temple complex.",
-      tour4Title:"Local Food", tour4Text:"Experience authentic Yogyakarta flavors and discover local dishes beyond the usual tourist spots.",
+      tour4Title:"Jeep Adventure", tour4Text:"Enjoy an exciting jeep ride through volcanic landscapes and scenic viewpoints around Yogyakarta.",
       tour5Title:"Culture & Local Life", tour5Text:"Meet the local side of Yogyakarta and experience traditions, crafts, markets, and everyday life.",
       tour6Title:"Custom Tour", tour6Text:"Have your own itinerary? Tell Endang-san what you want to see and she can help plan a flexible private or group tour.",
       certEyebrow:"Professional Guide", certTitle:"Certified & Experienced", certText:"With more than two decades of experience, Endang-san provides a professional and comfortable guiding experience for Japanese travelers, families, individuals, and groups.",
@@ -837,10 +905,10 @@
       footerTag:"Japanese-speaking tour guide in Yogyakarta", footerAbout:"About", footerTours:"Tours", footerContact:"Contact"
     },
     ja: {
-      brandTag:"ジョグジャカルタ ツアーガイド", navHome:"ホーム", navAbout:"プロフィール", navTours:"ツアー", navCert:"資格・認定", navContact:"お問い合わせ", navJapanese:"日本語", navCta:"WhatsApp",
-      heroEyebrow:"ジョグジャカルタへようこそ", heroTitle:"Endang-sanと巡るジョグジャカルタ",
+      brandTag:"ジョグジャカルタ ツアーガイド", navHome:"ホーム", navAbout:"プロフィール", navTours:"ツアー", navGallery:"ギャラリー", navCert:"資格・認定", navContact:"お問い合わせ", navJapanese:"日本語", navCta:"WhatsApp",
+      heroImageLabel:"心に残る朝日の風景", galleryEyebrow:"旅の思い出", galleryTitle:"お客様との思い出", galleryText:"ジョグジャカルタの寺院、文化、ローカル体験を一緒に楽しんだひとときです。", galleryCaption1:"ジョグジャカルタの寺院を訪ねて", galleryCaption2:"地元の暮らしを体験", galleryCaption3:"文化と笑顔を分かち合う", galleryCaption4:"旅の思い出づくり", heroEyebrow:"ジョグジャカルタへようこそ", heroTitle:"Endang-sanと巡るジョグジャカルタ",
       heroText:"20年以上の経験を持つ日本語対応の認定ツアーガイド。ジョグジャカルタの歴史、文化、食、そしてローカルな暮らしをご案内します。",
-      heroWhatsapp:"Endang-sanにWhatsApp →", heroExplore:"ツアーを見る", photoPlaceholder:"ここにEndang-sanの写真を<br>掲載できます。<br><small>おすすめ：ガイド中の写真</small>", badgeText:"ガイド経験",
+      heroWhatsapp:"Endang-sanにWhatsApp →", heroExplore:"ツアーを見る", badgeText:"ガイド経験",
       stat1:"ガイド経験", stat2:"日本語対応", stat3:"公認・資格取得ガイド", stat4:"個人・グループ対応",
       aboutEyebrow:"Endang-sanについて", aboutMini:"地元を知る、心を込めたガイド。", aboutLocation:"ジョグジャカルタ • インドネシア", aboutTitle:"ジョグジャカルタのローカルガイド",
       aboutP1:"こんにちは、Endang-sanです。ジョグジャカルタで20年以上、ツアーガイドとして活動しています。",
@@ -850,7 +918,7 @@
       tour1Title:"ジョグジャカルタ市内", tour1Text:"王宮（クラトン）、タマン・サリ、マリオボロなど、街の歴史や文化、ローカルなエリアを巡ります。",
       tour2Title:"ボロブドゥール", tour2Text:"インドネシアを代表する文化・歴史遺産、ボロブドゥールを現地ガイドと一緒にじっくり楽しみます。",
       tour3Title:"プランバナン", tour3Text:"プランバナン寺院群の物語、建築、そして周辺に広がる文化遺産をご紹介します。",
-      tour4Title:"ローカルグルメ", tour4Text:"定番の観光スポットだけでは出会えない、本場ジョグジャカルタの味やローカル料理を体験します。",
+      tour4Title:"ジープアドベンチャー", tour4Text:"ジープに乗って、火山の風景やジョグジャカルタ周辺の絶景スポットを巡ります。",
       tour5Title:"文化・ローカルライフ", tour5Text:"伝統工芸、市場、地域の文化など、観光だけでは見えないジョグジャカルタの日常に触れます。",
       tour6Title:"オーダーメイドツアー", tour6Text:"行きたい場所ややりたいことをお聞かせください。個人旅行にもグループ旅行にも合わせて柔軟にプランを作ります。",
       certEyebrow:"プロフェッショナルガイド", certTitle:"資格と豊富な経験", certText:"20年以上の経験を活かし、日本からのお客様、個人旅行、ファミリー、グループの皆様に安心で快適なガイドサービスをご提供します。",
@@ -872,15 +940,62 @@
     });
     document.documentElement.lang = lang === "ja" ? "ja" : "en";
     document.title = lang === "ja" ? "Endang-san | ジョグジャカルタ日本語ガイド" : "Endang-san | Yogyakarta Tour Guide";
-    localStorage.setItem("endangLanguage", lang);
+    try { localStorage.setItem("endangLanguage", lang); } catch (e) { /* storage may be disabled */ }
   }
 
   document.querySelectorAll(".lang-btn").forEach(btn => {
     btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
   });
 
-  const savedLanguage = localStorage.getItem("endangLanguage") || "en";
+  let savedLanguage = "en";
+  try { savedLanguage = localStorage.getItem("endangLanguage") || "en"; } catch (e) { /* use English by default */ }
   setLanguage(savedLanguage);
+
+  // Gallery slider: smooth, touch-friendly buttons and autoplay.
+  const galleryTrack = document.getElementById("galleryTrack");
+  const gallerySlides = galleryTrack ? Array.from(galleryTrack.children) : [];
+  const galleryDots = document.getElementById("galleryDots");
+  const galleryPrev = document.getElementById("galleryPrev");
+  const galleryNext = document.getElementById("galleryNext");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let galleryIndex = 0;
+  let galleryTimer = null;
+
+  function showGallerySlide(index) {
+    if (!galleryTrack || gallerySlides.length === 0) return;
+    galleryIndex = (index + gallerySlides.length) % gallerySlides.length;
+    galleryTrack.style.transform = `translateX(-${galleryIndex * 100}%)`;
+    if (galleryDots) {
+      Array.from(galleryDots.children).forEach((dot, i) => {
+        dot.classList.toggle("active", i === galleryIndex);
+        dot.setAttribute("aria-current", i === galleryIndex ? "true" : "false");
+      });
+    }
+  }
+
+  if (galleryTrack && galleryDots && gallerySlides.length) {
+    gallerySlides.forEach((slide, i) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "gallery-dot" + (i === 0 ? " active" : "");
+      dot.setAttribute("aria-label", `Show photo ${i + 1} of ${gallerySlides.length}`);
+      dot.addEventListener("click", () => { showGallerySlide(i); restartGalleryTimer(); });
+      galleryDots.appendChild(dot);
+    });
+    galleryPrev.addEventListener("click", () => { showGallerySlide(galleryIndex - 1); restartGalleryTimer(); });
+    galleryNext.addEventListener("click", () => { showGallerySlide(galleryIndex + 1); restartGalleryTimer(); });
+    function stopGalleryTimer() { if (galleryTimer) window.clearInterval(galleryTimer); galleryTimer = null; }
+    function startGalleryTimer() { if (!reduceMotion && gallerySlides.length > 1 && !galleryTimer) galleryTimer = window.setInterval(() => showGallerySlide(galleryIndex + 1), 5000); }
+    function restartGalleryTimer() { stopGalleryTimer(); startGalleryTimer(); }
+    const galleryShell = document.querySelector(".gallery-shell");
+    galleryShell.addEventListener("mouseenter", stopGalleryTimer);
+    galleryShell.addEventListener("mouseleave", startGalleryTimer);
+    galleryShell.addEventListener("focusin", stopGalleryTimer);
+    galleryShell.addEventListener("focusout", startGalleryTimer);
+    showGallerySlide(0);
+    startGalleryTimer();
+  }
+
 </script>
 
 </body>
